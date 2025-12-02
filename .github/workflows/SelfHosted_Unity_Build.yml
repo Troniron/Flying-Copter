@@ -1,12 +1,3 @@
-name: SelfHosted_Unity_Build
-
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-  pull_request:
-
 jobs:
   buildForAllSupportedPlatforms:
     runs-on: [self-hosted, windows]
@@ -20,17 +11,27 @@ jobs:
           - WebGL
 
     steps:
-      # Checkout the project
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Unity builder using your PC's local Unity installation + license
+      # 👇 NEW: make sure git is available in PATH
+      - name: Ensure git in PATH
+        shell: pwsh
+        run: |
+          $gitPath = 'C:\Program Files\Git\cmd'   # <- change if your where git shows different
+          if (Test-Path $gitPath) {
+            Write-Host "Adding $gitPath to PATH"
+            echo "PATH=$env:PATH;$gitPath" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          } else {
+            Write-Error "Git path not found: $gitPath"
+          }
+          git --version
+
       - name: Build with Unity
         uses: game-ci/unity-builder@v4
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
 
-      # Upload build artifacts
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
