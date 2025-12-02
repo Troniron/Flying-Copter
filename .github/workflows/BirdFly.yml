@@ -1,0 +1,9 @@
+name: First_Workflow
+on: workflow_dispatch
+jobs:
+  firstjob:
+   runs out: ubuntu-latest
+   setps:
+    -name: Iron
+     run: echo "Hi Man"
+  
