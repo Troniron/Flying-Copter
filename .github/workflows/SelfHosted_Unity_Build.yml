@@ -1,6 +1,26 @@
+name: SelfHosted_Unity_Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - BirdFly
+  pull_request:
+    branches:
+      - BirdFly
+
 jobs:
   buildForAllSupportedPlatforms:
     runs-on: [self-hosted, windows]
+
+    strategy:
+      fail-fast: false
+      matrix:
+        targetPlatform:
+          - Android
+          - StandaloneWindows64
+          - WebGL
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -22,3 +42,8 @@ jobs:
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
 
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Build-${{ matrix.targetPlatform }}
+          path: build/${{ matrix.targetPlatform }}
