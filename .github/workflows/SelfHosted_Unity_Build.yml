@@ -1,8 +1,11 @@
-name: SelfHosted_Unity_Build_Simple
+name: SelfHosted_Unity_Android
 
 on:
   workflow_dispatch:
   push:
+    branches:
+      - BirdFly
+  pull_request:
     branches:
       - BirdFly
 
@@ -11,13 +14,28 @@ jobs:
     runs-on: [self-hosted, windows]
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Build Android with Unity
         shell: cmd
         run: |
-          "C:\Program Files\Unity\Hub\Editor\2022.3.0f1\Editor\Unity.exe" ^
+          rem >>>>>>> CHANGE THIS PATH TO YOUR UNITY.EXE <<<<<<<<
+          set "UNITY_PATH=C:\Program Files\Unity\Hub\Editor\2022.3.41f1\Editor\Unity.exe"
+
+          echo Using Unity at: %UNITY_PATH%
+          if not exist "%UNITY_PATH%" (
+            echo ERROR: Unity not found at %UNITY_PATH%
+            exit /b 1
+          )
+
+          rem Make sure output folder exists
+          if not exist build\Android (
+            mkdir build\Android
+          )
+
+          rem Build the Android APK
+          "%UNITY_PATH%" ^
             -batchmode -nographics -quit ^
             -projectPath "%CD%" ^
             -buildTarget Android ^
