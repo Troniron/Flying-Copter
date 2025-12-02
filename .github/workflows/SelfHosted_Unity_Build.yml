@@ -25,13 +25,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Ensure git in PATH
+      - name: Ensure git & sh in PATH
         shell: cmd
         run: |
-          echo Checking git location...
-          where git
-          echo Adding Git to PATH for this job...
-          echo PATH=%PATH%;C:\Program Files\Git\cmd>>"%GITHUB_ENV%"
+          echo Adding Git and sh to PATH for this job...
+          echo PATH=%PATH%;C:\Program Files\Git\cmd;C:\Program Files\Git\bin;C:\Program Files\Git\usr\bin>>"%GITHUB_ENV%"
           git --version
 
       - name: Build with Unity
