@@ -1,0 +1,38 @@
+name: SelfHosted_Unity_Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  buildForAllSupportedPlatforms:
+    runs-on: [self-hosted, windows]
+
+    strategy:
+      fail-fast: false
+      matrix:
+        targetPlatform:
+          - Android
+          - StandaloneWindows64
+          - WebGL
+
+    steps:
+      # Checkout the project
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Unity builder using your PC's local Unity installation + license
+      - name: Build with Unity
+        uses: game-ci/unity-builder@v4
+        with:
+          targetPlatform: ${{ matrix.targetPlatform }}
+
+      # Upload build artifacts
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Build-${{ matrix.targetPlatform }}
+          path: build/${{ matrix.targetPlatform }}
