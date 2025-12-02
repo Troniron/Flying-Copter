@@ -26,15 +26,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Ensure git in PATH
-        shell: pwsh
+        shell: cmd
         run: |
-          $gitPath = 'C:\Program Files\Git\cmd'
-          if (Test-Path $gitPath) {
-            Write-Host "Adding $gitPath to PATH"
-            echo "PATH=$env:PATH;$gitPath" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          } else {
-            Write-Error "Git path not found: $gitPath"
-          }
+          echo Checking git location...
+          where git
+          echo Adding Git to PATH for this job...
+          echo PATH=%PATH%;C:\Program Files\Git\cmd>>"%GITHUB_ENV%"
           git --version
 
       - name: Build with Unity
