@@ -25,6 +25,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      # Make sure git and sh (from Git Bash) are available on PATH
       - name: Ensure git & sh in PATH
         shell: cmd
         run: |
@@ -34,6 +35,8 @@ jobs:
 
       - name: Build with Unity
         uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
 
