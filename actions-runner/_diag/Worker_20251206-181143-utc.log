@@ -1,0 +1,4157 @@
+[2025-12-06 18:11:43Z INFO HostContext] No proxy settings were found based on environmental variables (http_proxy/https_proxy/HTTP_PROXY/HTTPS_PROXY)
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known config file 'Credentials': 'D:\Unity\Flying-Copter\actions-runner\.credentials'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known config file 'Runner': 'D:\Unity\Flying-Copter\actions-runner\.runner'
+[2025-12-06 18:11:43Z INFO Worker] Version: 2.329.0
+[2025-12-06 18:11:43Z INFO Worker] Commit: c76c59996c8fa32e989164a5a695efb12608ae5a
+[2025-12-06 18:11:43Z INFO Worker] Culture: en-IN
+[2025-12-06 18:11:43Z INFO Worker] UI Culture: en-US
+[2025-12-06 18:11:43Z INFO Worker] Waiting to receive the job message from the channel.
+[2025-12-06 18:11:43Z INFO ProcessChannel] Receiving message of length 20589, with hash 'a24f631356d776b4902a10b2ec3d7e6e53cb20b2abfd29d2127c59e0047cadec'
+[2025-12-06 18:11:43Z INFO Worker] Message received.
+[2025-12-06 18:11:43Z INFO Worker] Job message:
+ {
+  "fileTable": [
+    ".github/workflows/SelfHosted_Unity_Build.yml"
+  ],
+  "mask": [
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    }
+  ],
+  "steps": [
+    {
+      "type": "action",
+      "reference": {
+        "type": "repository",
+        "name": "actions/checkout",
+        "ref": "v4",
+        "repositoryType": "GitHub"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 17,
+        "col": 15,
+        "lit": "Checkout repository"
+      },
+      "contextName": "__actions_checkout",
+      "condition": "success()",
+      "id": "b627dbb9-1487-4f0c-b503-2416c150acc5",
+      "name": "__actions_checkout"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 20,
+        "col": 15,
+        "lit": "Build Android with Unity"
+      },
+      "contextName": "__run",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 22,
+              "col": 14,
+              "lit": "rem >>>>>>> CHANGE THIS PATH TO YOUR UNITY.EXE <<<<<<<<\nset \"UNITY_PATH=C:\\Program Files\\Unity\\Hub\\Editor\\2022.3.20f1\\Editor\\Unity.exe\"\n\necho Using Unity at: %UNITY_PATH%\nif not exist \"%UNITY_PATH%\" (\n  echo ERROR: Unity not found at %UNITY_PATH%\n  exit /b 1\n)\n\nrem Make sure output folder exists\nif not exist build\\Android (\n  mkdir build\\Android\n)\n\nrem Build the Android APK\n\"%UNITY_PATH%\" ^\n  -batchmode -nographics -quit ^\n  -projectPath \"%CD%\" ^\n  -buildTarget Android ^\n  -customBuildName \"AndroidBuild\" ^\n  -customBuildPath \"build\\Android\\AndroidBuild.apk\"\n"
+            }
+          },
+          {
+            "key": "shell",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 21,
+              "col": 16,
+              "lit": "cmd"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "af316214-ff2c-4b7f-937d-7db0dce00491",
+      "name": "__run"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "repository",
+        "name": "actions/upload-artifact",
+        "ref": "v4",
+        "repositoryType": "GitHub"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 45,
+        "col": 15,
+        "lit": "Upload Android build"
+      },
+      "contextName": "__actions_upload-artifact",
+      "inputs": {
+        "type": 2,
+        "file": 1,
+        "line": 48,
+        "col": 11,
+        "map": [
+          {
+            "key": {
+              "type": 0,
+              "file": 1,
+              "line": 48,
+              "col": 11,
+              "lit": "name"
+            },
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 48,
+              "col": 17,
+              "lit": "AndroidBuild"
+            }
+          },
+          {
+            "key": {
+              "type": 0,
+              "file": 1,
+              "line": 49,
+              "col": 11,
+              "lit": "path"
+            },
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 49,
+              "col": 17,
+              "lit": "build/Android"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "42d25cc1-3656-446a-8983-5a21065648ab",
+      "name": "__actions_upload-artifact"
+    }
+  ],
+  "variables": {
+    "Actions.EnableHttpRedirects": {
+      "value": "true"
+    },
+    "DistributedTask.AddWarningToNode12Action": {
+      "value": "true"
+    },
+    "DistributedTask.AddWarningToNode16Action": {
+      "value": "true"
+    },
+    "DistributedTask.AllowRunnerContainerHooks": {
+      "value": "true"
+    },
+    "DistributedTask.DeprecateStepOutputCommands": {
+      "value": "true"
+    },
+    "DistributedTask.DetailUntarFailure": {
+      "value": "true"
+    },
+    "DistributedTask.EnableCompositeActions": {
+      "value": "true"
+    },
+    "DistributedTask.EnableJobServerQueueTelemetry": {
+      "value": "true"
+    },
+    "DistributedTask.EnhancedAnnotations": {
+      "value": "true"
+    },
+    "DistributedTask.ForceGithubJavascriptActionsToNode16": {
+      "value": "true"
+    },
+    "DistributedTask.ForceGithubJavascriptActionsToNode20": {
+      "value": "true"
+    },
+    "DistributedTask.LogTemplateErrorsAsDebugMessages": {
+      "value": "true"
+    },
+    "DistributedTask.MarkJobAsFailedOnWorkerCrash": {
+      "value": "true"
+    },
+    "DistributedTask.NewActionMetadata": {
+      "value": "true"
+    },
+    "DistributedTask.UploadStepSummary": {
+      "value": "true"
+    },
+    "DistributedTask.UseActionArchiveCache": {
+      "value": "true"
+    },
+    "DistributedTask.UseWhich2": {
+      "value": "true"
+    },
+    "RunService.FixEmbeddedIssues": {
+      "value": "true"
+    },
+    "actions_add_check_run_id_to_job_context": {
+      "value": "true"
+    },
+    "actions_container_action_runner_temp": {
+      "value": "true"
+    },
+    "actions_display_helpful_actions_download_errors": {
+      "value": "true"
+    },
+    "actions_skip_retry_complete_job_upon_known_errors": {
+      "value": "true"
+    },
+    "actions_uses_cache_service_v2": {
+      "value": "true"
+    },
+    "github_token": {
+      "value": "***",
+      "isSecret": true
+    },
+    "system.from_run_service": {
+      "value": "true"
+    },
+    "system.github.job": {
+      "value": "build-android"
+    },
+    "system.github.launch_endpoint": {
+      "value": "https://launch.actions.githubusercontent.com"
+    },
+    "system.github.results_endpoint": {
+      "value": "https://results-receiver.actions.githubusercontent.com/"
+    },
+    "system.github.results_upload_with_sdk": {
+      "value": "true"
+    },
+    "system.github.token": {
+      "value": "***",
+      "isSecret": true
+    },
+    "system.github.token.permissions": {
+      "value": "{\"Actions\":\"write\",\"ArtifactMetadata\":\"write\",\"Attestations\":\"write\",\"Checks\":\"write\",\"Contents\":\"write\",\"Deployments\":\"write\",\"Discussions\":\"write\",\"Issues\":\"write\",\"Metadata\":\"read\",\"Models\":\"read\",\"Packages\":\"write\",\"Pages\":\"write\",\"PullRequests\":\"write\",\"RepositoryProjects\":\"write\",\"SecurityEvents\":\"write\",\"Statuses\":\"write\"}"
+    },
+    "system.orchestrationId": {
+      "value": "41d56d80-110b-4b4a-a656-ff6fc89d2ef7.build-android.__default"
+    },
+    "system.phaseDisplayName": {
+      "value": "build-android"
+    },
+    "system.runner.lowdiskspacethreshold": {
+      "value": "100"
+    },
+    "system.runnerEnvironment": {
+      "value": "self-hosted"
+    },
+    "system.runnerGroupName": {
+      "value": "Default"
+    }
+  },
+  "messageType": "RunnerJobRequest",
+  "plan": {
+    "scopeIdentifier": "00000000-0000-0000-0000-000000000000",
+    "planType": "actions",
+    "version": 0,
+    "planId": "41d56d80-110b-4b4a-a656-ff6fc89d2ef7",
+    "planGroup": null,
+    "artifactUri": null,
+    "artifactLocation": null,
+    "definition": null,
+    "owner": null
+  },
+  "timeline": {
+    "id": "41d56d80-110b-4b4a-a656-ff6fc89d2ef7",
+    "changeId": 0,
+    "location": null
+  },
+  "jobId": "82cafa1f-f4da-5fe8-84bb-5713f1ebc880",
+  "jobDisplayName": "build-android",
+  "jobName": "__default",
+  "requestId": 0,
+  "lockedUntil": "0001-01-01T00:00:00",
+  "resources": {
+    "endpoints": [
+      {
+        "data": {
+          "ServerId": "",
+          "ServerName": "",
+          "CacheServerUrl": "https://artifactcache.actions.githubusercontent.com/nt9v6cYt2AZHi35oN74cs1xHbmBvzeaVyczUiVI9rXwy44yZ3q/",
+          "FeedStreamUrl": "wss://results-receiver.actions.githubusercontent.com/_ws/ingest.sock",
+          "ResultsServiceUrl": "https://results-receiver.actions.githubusercontent.com/",
+          "PipelinesServiceUrl": "https://pipelinesghubeus7.actions.githubusercontent.com/nt9v6cYt2AZHi35oN74cs1xHbmBvzeaVyczUiVI9rXwy44yZ3q/",
+          "GenerateIdTokenUrl": ""
+        },
+        "name": "SystemVssConnection",
+        "url": "https://run-actions-1-azure-eastus.actions.githubusercontent.com/4/",
+        "authorization": {
+          "parameters": {
+            "AccessToken": "***"
+          },
+          "scheme": "OAuth"
+        },
+        "isShared": false,
+        "isReady": true
+      }
+    ]
+  },
+  "contextData": {
+    "github": {
+      "t": 2,
+      "d": [
+        {
+          "k": "ref",
+          "v": "refs/heads/BirdFly"
+        },
+        {
+          "k": "sha",
+          "v": "31cdb5028f157a6cb0c818827d469228147a0269"
+        },
+        {
+          "k": "repository",
+          "v": "Troniron/Flying-Copter"
+        },
+        {
+          "k": "repository_owner",
+          "v": "Troniron"
+        },
+        {
+          "k": "repository_owner_id",
+          "v": "111337000"
+        },
+        {
+          "k": "repositoryUrl",
+          "v": "git://github.com/Troniron/Flying-Copter.git"
+        },
+        {
+          "k": "run_id",
+          "v": "19992348136"
+        },
+        {
+          "k": "run_number",
+          "v": "15"
+        },
+        {
+          "k": "retention_days",
+          "v": "90"
+        },
+        {
+          "k": "run_attempt",
+          "v": "1"
+        },
+        {
+          "k": "artifact_cache_size_limit",
+          "v": "10"
+        },
+        {
+          "k": "repository_visibility",
+          "v": "public"
+        },
+        {
+          "k": "actor_id",
+          "v": "111337000"
+        },
+        {
+          "k": "actor",
+          "v": "Troniron"
+        },
+        {
+          "k": "workflow",
+          "v": "SelfHosted_Unity_Android"
+        },
+        {
+          "k": "head_ref",
+          "v": ""
+        },
+        {
+          "k": "base_ref",
+          "v": ""
+        },
+        {
+          "k": "event_name",
+          "v": "push"
+        },
+        {
+          "k": "server_url",
+          "v": "https://github.com"
+        },
+        {
+          "k": "api_url",
+          "v": "https://api.github.com"
+        },
+        {
+          "k": "graphql_url",
+          "v": "https://api.github.com/graphql"
+        },
+        {
+          "k": "ref_name",
+          "v": "BirdFly"
+        },
+        {
+          "k": "ref_protected",
+          "v": false
+        },
+        {
+          "k": "ref_type",
+          "v": "branch"
+        },
+        {
+          "k": "secret_source",
+          "v": "Actions"
+        },
+        {
+          "k": "event",
+          "v": {
+            "t": 2,
+            "d": [
+              {
+                "k": "after",
+                "v": "31cdb5028f157a6cb0c818827d469228147a0269"
+              },
+              {
+                "k": "base_ref",
+                "v": null
+              },
+              {
+                "k": "before",
+                "v": "f3ad730b2ea4a7673f86ff0f4eedd3158bfe2e76"
+              },
+              {
+                "k": "commits",
+                "v": {
+                  "t": 1,
+                  "a": [
+                    {
+                      "t": 2,
+                      "d": [
+                        {
+                          "k": "author",
+                          "v": {
+                            "t": 2,
+                            "d": [
+                              {
+                                "k": "email",
+                                "v": "111337000+Troniron@users.noreply.github.com"
+                              },
+                              {
+                                "k": "name",
+                                "v": "Bhuvanesh.p"
+                              },
+                              {
+                                "k": "username",
+                                "v": "Troniron"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "k": "committer",
+                          "v": {
+                            "t": 2,
+                            "d": [
+                              {
+                                "k": "email",
+                                "v": "noreply@github.com"
+                              },
+                              {
+                                "k": "name",
+                                "v": "GitHub"
+                              },
+                              {
+                                "k": "username",
+                                "v": "web-flow"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "k": "distinct",
+                          "v": true
+                        },
+                        {
+                          "k": "id",
+                          "v": "31cdb5028f157a6cb0c818827d469228147a0269"
+                        },
+                        {
+                          "k": "message",
+                          "v": "Update Unity executable path for Android build"
+                        },
+                        {
+                          "k": "timestamp",
+                          "v": "2025-12-06T23:41:38+05:30"
+                        },
+                        {
+                          "k": "tree_id",
+                          "v": "39cfdd696c161c3a0f35cd104ff43fecc26c25bd"
+                        },
+                        {
+                          "k": "url",
+                          "v": "https://github.com/Troniron/Flying-Copter/commit/31cdb5028f157a6cb0c818827d469228147a0269"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "compare",
+                "v": "https://github.com/Troniron/Flying-Copter/compare/f3ad730b2ea4...31cdb5028f15"
+              },
+              {
+                "k": "created",
+                "v": false
+              },
+              {
+                "k": "deleted",
+                "v": false
+              },
+              {
+                "k": "forced",
+                "v": false
+              },
+              {
+                "k": "head_commit",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "author",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "email",
+                            "v": "111337000+Troniron@users.noreply.github.com"
+                          },
+                          {
+                            "k": "name",
+                            "v": "Bhuvanesh.p"
+                          },
+                          {
+                            "k": "username",
+                            "v": "Troniron"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "committer",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "email",
+                            "v": "noreply@github.com"
+                          },
+                          {
+                            "k": "name",
+                            "v": "GitHub"
+                          },
+                          {
+                            "k": "username",
+                            "v": "web-flow"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "distinct",
+                      "v": true
+                    },
+                    {
+                      "k": "id",
+                      "v": "31cdb5028f157a6cb0c818827d469228147a0269"
+                    },
+                    {
+                      "k": "message",
+                      "v": "Update Unity executable path for Android build"
+                    },
+                    {
+                      "k": "timestamp",
+                      "v": "2025-12-06T23:41:38+05:30"
+                    },
+                    {
+                      "k": "tree_id",
+                      "v": "39cfdd696c161c3a0f35cd104ff43fecc26c25bd"
+                    },
+                    {
+                      "k": "url",
+                      "v": "https://github.com/Troniron/Flying-Copter/commit/31cdb5028f157a6cb0c818827d469228147a0269"
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "pusher",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "email",
+                      "v": "111337000+Troniron@users.noreply.github.com"
+                    },
+                    {
+                      "k": "name",
+                      "v": "Troniron"
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "ref",
+                "v": "refs/heads/BirdFly"
+              },
+              {
+                "k": "repository",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "allow_forking",
+                      "v": true
+                    },
+                    {
+                      "k": "archive_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/{archive_format}{/ref}"
+                    },
+                    {
+                      "k": "archived",
+                      "v": false
+                    },
+                    {
+                      "k": "assignees_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/assignees{/user}"
+                    },
+                    {
+                      "k": "blobs_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/git/blobs{/sha}"
+                    },
+                    {
+                      "k": "branches_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/branches{/branch}"
+                    },
+                    {
+                      "k": "clone_url",
+                      "v": "https://github.com/Troniron/Flying-Copter.git"
+                    },
+                    {
+                      "k": "collaborators_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/collaborators{/collaborator}"
+                    },
+                    {
+                      "k": "comments_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/comments{/number}"
+                    },
+                    {
+                      "k": "commits_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/commits{/sha}"
+                    },
+                    {
+                      "k": "compare_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/compare/{base}...{head}"
+                    },
+                    {
+                      "k": "contents_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/contents/{+path}"
+                    },
+                    {
+                      "k": "contributors_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/contributors"
+                    },
+                    {
+                      "k": "created_at",
+                      "v": 1672749388.0
+                    },
+                    {
+                      "k": "default_branch",
+                      "v": "BirdFly"
+                    },
+                    {
+                      "k": "deployments_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/deployments"
+                    },
+                    {
+                      "k": "description",
+                      "v": "You can play this Game--https://bhuvanesh-voyage.itch.io/action"
+                    },
+                    {
+                      "k": "disabled",
+                      "v": false
+                    },
+                    {
+                      "k": "downloads_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/downloads"
+                    },
+                    {
+                      "k": "events_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/events"
+                    },
+                    {
+                      "k": "fork",
+                      "v": false
+                    },
+                    {
+                      "k": "forks",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "forks_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "forks_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/forks"
+                    },
+                    {
+                      "k": "full_name",
+                      "v": "Troniron/Flying-Copter"
+                    },
+                    {
+                      "k": "git_commits_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/git/commits{/sha}"
+                    },
+                    {
+                      "k": "git_refs_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/git/refs{/sha}"
+                    },
+                    {
+                      "k": "git_tags_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/git/tags{/sha}"
+                    },
+                    {
+                      "k": "git_url",
+                      "v": "git://github.com/Troniron/Flying-Copter.git"
+                    },
+                    {
+                      "k": "has_discussions",
+                      "v": false
+                    },
+                    {
+                      "k": "has_downloads",
+                      "v": true
+                    },
+                    {
+                      "k": "has_issues",
+                      "v": true
+                    },
+                    {
+                      "k": "has_pages",
+                      "v": false
+                    },
+                    {
+                      "k": "has_projects",
+                      "v": true
+                    },
+                    {
+                      "k": "has_wiki",
+                      "v": true
+                    },
+                    {
+                      "k": "homepage",
+                      "v": null
+                    },
+                    {
+                      "k": "hooks_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/hooks"
+                    },
+                    {
+                      "k": "html_url",
+                      "v": "https://github.com/Troniron/Flying-Copter"
+                    },
+                    {
+                      "k": "id",
+                      "v": 584753971.0
+                    },
+                    {
+                      "k": "is_template",
+                      "v": false
+                    },
+                    {
+                      "k": "issue_comment_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/issues/comments{/number}"
+                    },
+                    {
+                      "k": "issue_events_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/issues/events{/number}"
+                    },
+                    {
+                      "k": "issues_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/issues{/number}"
+                    },
+                    {
+                      "k": "keys_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/keys{/key_id}"
+                    },
+                    {
+                      "k": "labels_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/labels{/name}"
+                    },
+                    {
+                      "k": "language",
+                      "v": "C#"
+                    },
+                    {
+                      "k": "languages_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/languages"
+                    },
+                    {
+                      "k": "license",
+                      "v": null
+                    },
+                    {
+                      "k": "master_branch",
+                      "v": "BirdFly"
+                    },
+                    {
+                      "k": "merges_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/merges"
+                    },
+                    {
+                      "k": "milestones_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/milestones{/number}"
+                    },
+                    {
+                      "k": "mirror_url",
+                      "v": null
+                    },
+                    {
+                      "k": "name",
+                      "v": "Flying-Copter"
+                    },
+                    {
+                      "k": "node_id",
+                      "v": "R_kgDOItqjMw"
+                    },
+                    {
+                      "k": "notifications_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/notifications{?since,all,participating}"
+                    },
+                    {
+                      "k": "open_issues",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "open_issues_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "owner",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "avatar_url",
+                            "v": "https://avatars.githubusercontent.com/u/111337000?v=4"
+                          },
+                          {
+                            "k": "email",
+                            "v": "111337000+Troniron@users.noreply.github.com"
+                          },
+                          {
+                            "k": "events_url",
+                            "v": "https://api.github.com/users/Troniron/events{/privacy}"
+                          },
+                          {
+                            "k": "followers_url",
+                            "v": "https://api.github.com/users/Troniron/followers"
+                          },
+                          {
+                            "k": "following_url",
+                            "v": "https://api.github.com/users/Troniron/following{/other_user}"
+                          },
+                          {
+                            "k": "gists_url",
+                            "v": "https://api.github.com/users/Troniron/gists{/gist_id}"
+                          },
+                          {
+                            "k": "gravatar_id",
+                            "v": ""
+                          },
+                          {
+                            "k": "html_url",
+                            "v": "https://github.com/Troniron"
+                          },
+                          {
+                            "k": "id",
+                            "v": 111337000.0
+                          },
+                          {
+                            "k": "login",
+                            "v": "Troniron"
+                          },
+                          {
+                            "k": "name",
+                            "v": "Troniron"
+                          },
+                          {
+                            "k": "node_id",
+                            "v": "U_kgDOBqLeKA"
+                          },
+                          {
+                            "k": "organizations_url",
+                            "v": "https://api.github.com/users/Troniron/orgs"
+                          },
+                          {
+                            "k": "received_events_url",
+                            "v": "https://api.github.com/users/Troniron/received_events"
+                          },
+                          {
+                            "k": "repos_url",
+                            "v": "https://api.github.com/users/Troniron/repos"
+                          },
+                          {
+                            "k": "site_admin",
+                            "v": false
+                          },
+                          {
+                            "k": "starred_url",
+                            "v": "https://api.github.com/users/Troniron/starred{/owner}{/repo}"
+                          },
+                          {
+                            "k": "subscriptions_url",
+                            "v": "https://api.github.com/users/Troniron/subscriptions"
+                          },
+                          {
+                            "k": "type",
+                            "v": "User"
+                          },
+                          {
+                            "k": "url",
+                            "v": "https://api.github.com/users/Troniron"
+                          },
+                          {
+                            "k": "user_view_type",
+                            "v": "public"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "private",
+                      "v": false
+                    },
+                    {
+                      "k": "pulls_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/pulls{/number}"
+                    },
+                    {
+                      "k": "pushed_at",
+                      "v": 1765044698.0
+                    },
+                    {
+                      "k": "releases_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/releases{/id}"
+                    },
+                    {
+                      "k": "size",
+                      "v": 1263.0
+                    },
+                    {
+                      "k": "ssh_url",
+                      "v": "git@github.com:Troniron/Flying-Copter.git"
+                    },
+                    {
+                      "k": "stargazers",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "stargazers_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "stargazers_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/stargazers"
+                    },
+                    {
+                      "k": "statuses_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/statuses/{sha}"
+                    },
+                    {
+                      "k": "subscribers_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/subscribers"
+                    },
+                    {
+                      "k": "subscription_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/subscription"
+                    },
+                    {
+                      "k": "svn_url",
+                      "v": "https://github.com/Troniron/Flying-Copter"
+                    },
+                    {
+                      "k": "tags_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/tags"
+                    },
+                    {
+                      "k": "teams_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/teams"
+                    },
+                    {
+                      "k": "topics",
+                      "v": {
+                        "t": 1
+                      }
+                    },
+                    {
+                      "k": "trees_url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter/git/trees{/sha}"
+                    },
+                    {
+                      "k": "updated_at",
+                      "v": "2025-12-02T19:25:25Z"
+                    },
+                    {
+                      "k": "url",
+                      "v": "https://api.github.com/repos/Troniron/Flying-Copter"
+                    },
+                    {
+                      "k": "visibility",
+                      "v": "public"
+                    },
+                    {
+                      "k": "watchers",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "watchers_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "web_commit_signoff_required",
+                      "v": false
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "sender",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "avatar_url",
+                      "v": "https://avatars.githubusercontent.com/u/111337000?v=4"
+                    },
+                    {
+                      "k": "events_url",
+                      "v": "https://api.github.com/users/Troniron/events{/privacy}"
+                    },
+                    {
+                      "k": "followers_url",
+                      "v": "https://api.github.com/users/Troniron/followers"
+                    },
+                    {
+                      "k": "following_url",
+                      "v": "https://api.github.com/users/Troniron/following{/other_user}"
+                    },
+                    {
+                      "k": "gists_url",
+                      "v": "https://api.github.com/users/Troniron/gists{/gist_id}"
+                    },
+                    {
+                      "k": "gravatar_id",
+                      "v": ""
+                    },
+                    {
+                      "k": "html_url",
+                      "v": "https://github.com/Troniron"
+                    },
+                    {
+                      "k": "id",
+                      "v": 111337000.0
+                    },
+                    {
+                      "k": "login",
+                      "v": "Troniron"
+                    },
+                    {
+                      "k": "node_id",
+                      "v": "U_kgDOBqLeKA"
+                    },
+                    {
+                      "k": "organizations_url",
+                      "v": "https://api.github.com/users/Troniron/orgs"
+                    },
+                    {
+                      "k": "received_events_url",
+                      "v": "https://api.github.com/users/Troniron/received_events"
+                    },
+                    {
+                      "k": "repos_url",
+                      "v": "https://api.github.com/users/Troniron/repos"
+                    },
+                    {
+                      "k": "site_admin",
+                      "v": false
+                    },
+                    {
+                      "k": "starred_url",
+                      "v": "https://api.github.com/users/Troniron/starred{/owner}{/repo}"
+                    },
+                    {
+                      "k": "subscriptions_url",
+                      "v": "https://api.github.com/users/Troniron/subscriptions"
+                    },
+                    {
+                      "k": "type",
+                      "v": "User"
+                    },
+                    {
+                      "k": "url",
+                      "v": "https://api.github.com/users/Troniron"
+                    },
+                    {
+                      "k": "user_view_type",
+                      "v": "public"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "k": "workflow_ref",
+          "v": "Troniron/Flying-Copter/.github/workflows/SelfHosted_Unity_Build.yml@refs/heads/BirdFly"
+        },
+        {
+          "k": "workflow_sha",
+          "v": "31cdb5028f157a6cb0c818827d469228147a0269"
+        },
+        {
+          "k": "repository_id",
+          "v": "584753971"
+        },
+        {
+          "k": "triggering_actor",
+          "v": "Troniron"
+        }
+      ]
+    },
+    "inputs": {
+      "t": 2
+    },
+    "job": {
+      "t": 2,
+      "d": [
+        {
+          "k": "check_run_id",
+          "v": 57334900891.0
+        }
+      ]
+    },
+    "matrix": null,
+    "needs": {
+      "t": 2
+    },
+    "strategy": {
+      "t": 2,
+      "d": [
+        {
+          "k": "fail-fast",
+          "v": true
+        },
+        {
+          "k": "job-index",
+          "v": 0.0
+        },
+        {
+          "k": "job-total",
+          "v": 1.0
+        },
+        {
+          "k": "max-parallel",
+          "v": 1.0
+        }
+      ]
+    },
+    "vars": {
+      "t": 2
+    }
+  },
+  "billingOwnerId": "U_kgDOBqLeKA"
+}
+[2025-12-06 18:11:43Z INFO JobRunner] Job ID 82cafa1f-f4da-5fe8-84bb-5713f1ebc880
+[2025-12-06 18:11:43Z INFO ConfigurationStore] currentAssemblyLocation: D:\Unity\Flying-Copter\actions-runner\bin\Runner.Worker.dll
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO ConfigurationStore] binPath: D:\Unity\Flying-Copter\actions-runner\bin
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO ConfigurationStore] RootFolder: D:\Unity\Flying-Copter\actions-runner
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known config file 'Runner': 'D:\Unity\Flying-Copter\actions-runner\.runner'
+[2025-12-06 18:11:43Z INFO ConfigurationStore] ConfigFilePath: D:\Unity\Flying-Copter\actions-runner\.runner
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known config file 'MigratedRunner': 'D:\Unity\Flying-Copter\actions-runner\.runner_migrated'
+[2025-12-06 18:11:43Z INFO ConfigurationStore] MigratedConfigFilePath: D:\Unity\Flying-Copter\actions-runner\.runner_migrated
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known config file 'Credentials': 'D:\Unity\Flying-Copter\actions-runner\.credentials'
+[2025-12-06 18:11:43Z INFO ConfigurationStore] CredFilePath: D:\Unity\Flying-Copter\actions-runner\.credentials
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known config file 'MigratedCredentials': 'D:\Unity\Flying-Copter\actions-runner\.credentials_migrated'
+[2025-12-06 18:11:43Z INFO ConfigurationStore] MigratedCredFilePath: D:\Unity\Flying-Copter\actions-runner\.credentials_migrated
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known config file 'Service': 'D:\Unity\Flying-Copter\actions-runner\.service'
+[2025-12-06 18:11:43Z INFO ConfigurationStore] ServiceConfigFilePath: D:\Unity\Flying-Copter\actions-runner\.service
+[2025-12-06 18:11:43Z INFO ConfigurationStore] Read setting file: 400 chars
+[2025-12-06 18:11:43Z INFO JobRunner] Initializing launch client
+[2025-12-06 18:11:43Z INFO JobServerQueue] Initializing results client
+[2025-12-06 18:11:43Z INFO ResultServer] Creating websocket client ...wss://results-receiver.actions.githubusercontent.com/_ws/ingest.sock
+[2025-12-06 18:11:43Z INFO ResultServer] Attempting to start websocket client with delay 00:00:00.
+[2025-12-06 18:11:43Z INFO JobServerQueue] Start process web console line queue.
+[2025-12-06 18:11:43Z INFO JobServerQueue] Start process file upload queue.
+[2025-12-06 18:11:43Z INFO JobServerQueue] Start results file upload queue.
+[2025-12-06 18:11:43Z INFO JobServerQueue] Starting results-based upload queue...
+[2025-12-06 18:11:43Z INFO JobServerQueue] Start process timeline update queue.
+[2025-12-06 18:11:43Z INFO ExecutionContext] Initializing Job context
+[2025-12-06 18:11:43Z INFO ExecutionContext] Initialize GitHub context
+[2025-12-06 18:11:43Z INFO ExecutionContext] Initialize Env context
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Diag': 'D:\Unity\Flying-Copter\actions-runner\_diag'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Diag': 'D:\Unity\Flying-Copter\actions-runner\_diag'
+[2025-12-06 18:11:43Z INFO JobRunner] Starting the job execution context.
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:43Z INFO JobRunner] Validating directory permissions for: 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Tools': 'D:\Unity\Flying-Copter\actions-runner\_work\_tool'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Temp': 'D:\Unity\Flying-Copter\actions-runner\_work\_temp'
+[2025-12-06 18:11:43Z INFO JobRunner] Getting job extension.
+[2025-12-06 18:11:43Z INFO JobRunner] Initialize job. Getting all job steps.
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Diag': 'D:\Unity\Flying-Copter\actions-runner\_diag'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Diag': 'D:\Unity\Flying-Copter\actions-runner\_diag'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known config file 'Credentials': 'D:\Unity\Flying-Copter\actions-runner\.credentials'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known config file 'SetupInfo': 'D:\Unity\Flying-Copter\actions-runner\.setup_info'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:43Z INFO PipelineDirectoryManager] Loading tracking config if exists: D:\Unity\Flying-Copter\actions-runner\_work\_PipelineMapping\Troniron/Flying-Copter\PipelineFolder.json
+[2025-12-06 18:11:43Z INFO PipelineDirectoryManager] Updating job run properties.
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:43Z INFO JobExtension] Downloading actions
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:43Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:11:43Z INFO Worker] Listening for cancel message from the channel.
+[2025-12-06 18:11:43Z INFO Worker] Waiting for the job to complete or for a cancel message from the channel.
+[2025-12-06 18:11:44Z INFO ResultServer] Successfully started websocket client.
+[2025-12-06 18:11:44Z INFO JobServerQueue] Try to append 1 batches web console lines for record '8e505001-b5be-4aa7-8d97-fa69ebe85c91', success rate: 1/1.
+[2025-12-06 18:11:44Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:44Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:44Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:44Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:11:44Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:44Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:44Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:44Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:11:44Z INFO ActionManager] Save archive 'https://api.github.com/repos/actions/checkout/zipball/34e114876b0b11c390a56381ad16ebd13914f8d5' into D:\Unity\Flying-Copter\actions-runner\_work\_actions\_temp_72f931bf-a482-458c-bd70-f58d11e695d3\77bd9b3c-af61-489d-be2b-c4c2ada6ec79.zip.
+[2025-12-06 18:11:44Z INFO JobServerQueue] Try to append 1 batches web console lines for record '8e505001-b5be-4aa7-8d97-fa69ebe85c91', success rate: 1/1.
+[2025-12-06 18:11:44Z INFO JobServerQueue] Job timeline record has been updated for the first time.
+[2025-12-06 18:11:45Z INFO ActionManager] Request URL: https://api.github.com/repos/actions/checkout/zipball/34e114876b0b11c390a56381ad16ebd13914f8d5 X-GitHub-Request-Id: 9CBA:11A82:E256:AFCB9:693471E2 Http Status: OK
+[2025-12-06 18:11:45Z INFO ActionManager] Finished getting action repository.
+[2025-12-06 18:11:45Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:45Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:45Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:45Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:11:45Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:45Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:45Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:45Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:11:45Z INFO ActionManager] Save archive 'https://api.github.com/repos/actions/upload-artifact/zipball/ea165f8d65b6e75b540449e92b4886f43607fa02' into D:\Unity\Flying-Copter\actions-runner\_work\_actions\_temp_00d3958f-852b-4592-887e-e630633eb140\179a9ca0-63c7-48f9-aefe-3aa1f0cc6a4b.zip.
+[2025-12-06 18:11:45Z INFO JobServerQueue] Try to append 1 batches web console lines for record '8e505001-b5be-4aa7-8d97-fa69ebe85c91', success rate: 1/1.
+[2025-12-06 18:11:46Z INFO ActionManager] Request URL: https://api.github.com/repos/actions/upload-artifact/zipball/ea165f8d65b6e75b540449e92b4886f43607fa02 X-GitHub-Request-Id: 9B96:2BB7D5:E965:AE699:693471E3 Http Status: OK
+[2025-12-06 18:11:46Z INFO ActionManager] Finished getting action repository.
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:11:46Z INFO ActionManifestManager] Load schema file with definitions: [
+  "null",
+  "boolean",
+  "number",
+  "string",
+  "sequence",
+  "mapping",
+  "any",
+  "action-root",
+  "inputs",
+  "input",
+  "outputs",
+  "output-definition",
+  "runs",
+  "container-runs",
+  "container-runs-args",
+  "container-runs-env",
+  "node-runs",
+  "plugin-runs",
+  "composite-runs",
+  "composite-steps",
+  "composite-step",
+  "run-step",
+  "uses-step",
+  "container-runs-context",
+  "output-value",
+  "input-default-context",
+  "non-empty-string",
+  "string-steps-context",
+  "boolean-steps-context",
+  "step-env",
+  "step-if",
+  "step-with"
+]
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:11:46Z INFO ActionManifestManager] Loaded action.yml file: {
+  "name": "Checkout",
+  "description": "Checkout a Git repository at a particular version",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 4,
+          "col": 3,
+          "lit": "repository"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 6,
+          "col": 14,
+          "expr": "github.repository"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 7,
+          "col": 3,
+          "lit": "ref"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 12,
+          "col": 3,
+          "lit": "token"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 24,
+          "col": 14,
+          "expr": "github.token"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 25,
+          "col": 3,
+          "lit": "ssh-key"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 37,
+          "col": 3,
+          "lit": "ssh-known-hosts"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 42,
+          "col": 3,
+          "lit": "ssh-strict"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 47,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 48,
+          "col": 3,
+          "lit": "ssh-user"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 51,
+          "col": 14,
+          "lit": "git"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 52,
+          "col": 3,
+          "lit": "persist-credentials"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 54,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 55,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 57,
+          "col": 3,
+          "lit": "clean"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 59,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 60,
+          "col": 3,
+          "lit": "filter"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 64,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 65,
+          "col": 3,
+          "lit": "sparse-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 69,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 70,
+          "col": 3,
+          "lit": "sparse-checkout-cone-mode"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 73,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 74,
+          "col": 3,
+          "lit": "fetch-depth"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 76,
+          "col": 14,
+          "lit": "1"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 77,
+          "col": 3,
+          "lit": "fetch-tags"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 79,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 80,
+          "col": 3,
+          "lit": "show-progress"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 82,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 83,
+          "col": 3,
+          "lit": "lfs"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 85,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 86,
+          "col": 3,
+          "lit": "submodules"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 94,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 95,
+          "col": 3,
+          "lit": "set-safe-directory"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 97,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 98,
+          "col": 3,
+          "lit": "github-server-url"
+        },
+        "value": ""
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": true,
+    "script": "dist/index.js",
+    "pre": null,
+    "post": "dist/index.js",
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2025-12-06 18:11:46Z INFO ActionManager] Action node.js file: dist/index.js, no more preparation.
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:11:46Z INFO ActionManager] Load action that reference repository from 'D:\Unity\Flying-Copter\actions-runner\_work\_actions\actions\checkout\v4'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:11:46Z INFO ActionManifestManager] Loaded action.yml file: {
+  "name": "Checkout",
+  "description": "Checkout a Git repository at a particular version",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 4,
+          "col": 3,
+          "lit": "repository"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 6,
+          "col": 14,
+          "expr": "github.repository"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 7,
+          "col": 3,
+          "lit": "ref"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 12,
+          "col": 3,
+          "lit": "token"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 24,
+          "col": 14,
+          "expr": "github.token"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 25,
+          "col": 3,
+          "lit": "ssh-key"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 37,
+          "col": 3,
+          "lit": "ssh-known-hosts"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 42,
+          "col": 3,
+          "lit": "ssh-strict"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 47,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 48,
+          "col": 3,
+          "lit": "ssh-user"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 51,
+          "col": 14,
+          "lit": "git"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 52,
+          "col": 3,
+          "lit": "persist-credentials"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 54,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 55,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 57,
+          "col": 3,
+          "lit": "clean"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 59,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 60,
+          "col": 3,
+          "lit": "filter"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 64,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 65,
+          "col": 3,
+          "lit": "sparse-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 69,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 70,
+          "col": 3,
+          "lit": "sparse-checkout-cone-mode"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 73,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 74,
+          "col": 3,
+          "lit": "fetch-depth"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 76,
+          "col": 14,
+          "lit": "1"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 77,
+          "col": 3,
+          "lit": "fetch-tags"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 79,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 80,
+          "col": 3,
+          "lit": "show-progress"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 82,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 83,
+          "col": 3,
+          "lit": "lfs"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 85,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 86,
+          "col": 3,
+          "lit": "submodules"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 94,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 95,
+          "col": 3,
+          "lit": "set-safe-directory"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 97,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 98,
+          "col": 3,
+          "lit": "github-server-url"
+        },
+        "value": ""
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": true,
+    "script": "dist/index.js",
+    "pre": null,
+    "post": "dist/index.js",
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2025-12-06 18:11:46Z INFO ActionManager] Action pre node.js file: N/A.
+[2025-12-06 18:11:46Z INFO ActionManager] Action node.js file: dist/index.js.
+[2025-12-06 18:11:46Z INFO ActionManager] Action post node.js file: dist/index.js.
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:11:46Z INFO ActionManifestManager] Ignore action property author.
+[2025-12-06 18:11:46Z INFO ActionManifestManager] Loaded action.yml file: {
+  "name": "Upload a Build Artifact",
+  "description": "Upload a build artifact that can be used by subsequent workflow steps",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 5,
+          "col": 3,
+          "lit": "name"
+        },
+        "value": {
+          "type": 0,
+          "file": 3,
+          "line": 7,
+          "col": 14,
+          "lit": "artifact"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 8,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 11,
+          "col": 3,
+          "lit": "if-no-files-found"
+        },
+        "value": {
+          "type": 0,
+          "file": 3,
+          "line": 19,
+          "col": 14,
+          "lit": "warn"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 20,
+          "col": 3,
+          "lit": "retention-days"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 26,
+          "col": 3,
+          "lit": "compression-level"
+        },
+        "value": {
+          "type": 0,
+          "file": 3,
+          "line": 36,
+          "col": 14,
+          "lit": "6"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 37,
+          "col": 3,
+          "lit": "overwrite"
+        },
+        "value": {
+          "type": 0,
+          "file": 3,
+          "line": 42,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 43,
+          "col": 3,
+          "lit": "include-hidden-files"
+        },
+        "value": {
+          "type": 0,
+          "file": 3,
+          "line": 47,
+          "col": 14,
+          "lit": "false"
+        }
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": false,
+    "script": "dist/upload/index.js",
+    "pre": null,
+    "post": null,
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2025-12-06 18:11:46Z INFO ActionManager] Action node.js file: dist/upload/index.js, no more preparation.
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:11:46Z INFO ActionManager] Load action that reference repository from 'D:\Unity\Flying-Copter\actions-runner\_work\_actions\actions\upload-artifact\v4'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:11:46Z INFO ActionManifestManager] Ignore action property author.
+[2025-12-06 18:11:46Z INFO ActionManifestManager] Loaded action.yml file: {
+  "name": "Upload a Build Artifact",
+  "description": "Upload a build artifact that can be used by subsequent workflow steps",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 5,
+          "col": 3,
+          "lit": "name"
+        },
+        "value": {
+          "type": 0,
+          "file": 3,
+          "line": 7,
+          "col": 14,
+          "lit": "artifact"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 8,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 11,
+          "col": 3,
+          "lit": "if-no-files-found"
+        },
+        "value": {
+          "type": 0,
+          "file": 3,
+          "line": 19,
+          "col": 14,
+          "lit": "warn"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 20,
+          "col": 3,
+          "lit": "retention-days"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 26,
+          "col": 3,
+          "lit": "compression-level"
+        },
+        "value": {
+          "type": 0,
+          "file": 3,
+          "line": 36,
+          "col": 14,
+          "lit": "6"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 37,
+          "col": 3,
+          "lit": "overwrite"
+        },
+        "value": {
+          "type": 0,
+          "file": 3,
+          "line": 42,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 43,
+          "col": 3,
+          "lit": "include-hidden-files"
+        },
+        "value": {
+          "type": 0,
+          "file": 3,
+          "line": 47,
+          "col": 14,
+          "lit": "false"
+        }
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": false,
+    "script": "dist/upload/index.js",
+    "pre": null,
+    "post": null,
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2025-12-06 18:11:46Z INFO ActionManager] Action pre node.js file: N/A.
+[2025-12-06 18:11:46Z INFO ActionManager] Action node.js file: dist/upload/index.js.
+[2025-12-06 18:11:46Z INFO ActionManager] Action post node.js file: N/A.
+[2025-12-06 18:11:46Z INFO JobExtension] Adding .
+[2025-12-06 18:11:46Z INFO JobExtension] Adding .
+[2025-12-06 18:11:46Z INFO JobExtension] Adding .
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Diag': 'D:\Unity\Flying-Copter\actions-runner\_diag'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Diag': 'D:\Unity\Flying-Copter\actions-runner\_diag'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Diag': 'D:\Unity\Flying-Copter\actions-runner\_diag'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Diag': 'D:\Unity\Flying-Copter\actions-runner\_diag'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Diag': 'D:\Unity\Flying-Copter\actions-runner\_diag'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Diag': 'D:\Unity\Flying-Copter\actions-runner\_diag'
+[2025-12-06 18:11:46Z INFO JobExtension] Total accessible running process: 353.
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:46Z INFO JobExtension] Start checking service connectivity in background.
+[2025-12-06 18:11:46Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "setup_job",
+  "type": "runner",
+  "stage": "Pre",
+  "stepId": "8e505001-b5be-4aa7-8d97-fa69ebe85c91",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 4,
+  "startTime": "2025-12-06T18:11:43.5863929Z",
+  "finishTime": "2025-12-06T18:11:46.9493967Z"
+}.
+[2025-12-06 18:11:46Z INFO JobRunner] Total job steps: 3.
+[2025-12-06 18:11:46Z INFO JobRunner] Run all job steps.
+[2025-12-06 18:11:46Z INFO StepsRunner] Processing step: DisplayName='Checkout repository'
+[2025-12-06 18:11:46Z INFO StepsRunner] Evaluating: success()
+[2025-12-06 18:11:46Z INFO StepsRunner] Result: true
+[2025-12-06 18:11:46Z INFO StepsRunner] Starting the step.
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:46Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:46Z INFO StepsRunner] Which2: 'chcp'
+[2025-12-06 18:11:46Z INFO StepsRunner] Location: 'C:\WINDOWS\system32\chcp.COM'
+[2025-12-06 18:11:46Z INFO JobServerQueue] Try to append 1 batches web console lines for record '8e505001-b5be-4aa7-8d97-fa69ebe85c91', success rate: 1/1.
+[2025-12-06 18:11:46Z INFO ProcessInvokerWrapper] Starting process:
+[2025-12-06 18:11:46Z INFO ProcessInvokerWrapper]   File name: 'C:\WINDOWS\system32\chcp.COM'
+[2025-12-06 18:11:46Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2025-12-06 18:11:46Z INFO ProcessInvokerWrapper]   Working directory: 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:46Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-12-06 18:11:46Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-12-06 18:11:46Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2025-12-06 18:11:46Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-12-06 18:11:46Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2025-12-06 18:11:46Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-12-06 18:11:46Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2025-12-06 18:11:46Z INFO ProcessInvokerWrapper] Process started with process id 3528, waiting for process exit.
+[2025-12-06 18:11:46Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-12-06 18:11:46Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-12-06 18:11:46Z INFO ProcessInvokerWrapper] Finished process 3528 with exit code 0, and elapsed time 00:00:00.0143160.
+[2025-12-06 18:11:46Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:11:47Z INFO ActionManager] Load action that reference repository from 'D:\Unity\Flying-Copter\actions-runner\_work\_actions\actions\checkout\v4'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Loaded action.yml file: {
+  "name": "Checkout",
+  "description": "Checkout a Git repository at a particular version",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 4,
+          "col": 3,
+          "lit": "repository"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 6,
+          "col": 14,
+          "expr": "github.repository"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 7,
+          "col": 3,
+          "lit": "ref"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 12,
+          "col": 3,
+          "lit": "token"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 24,
+          "col": 14,
+          "expr": "github.token"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 25,
+          "col": 3,
+          "lit": "ssh-key"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 37,
+          "col": 3,
+          "lit": "ssh-known-hosts"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 42,
+          "col": 3,
+          "lit": "ssh-strict"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 47,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 48,
+          "col": 3,
+          "lit": "ssh-user"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 51,
+          "col": 14,
+          "lit": "git"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 52,
+          "col": 3,
+          "lit": "persist-credentials"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 54,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 55,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 57,
+          "col": 3,
+          "lit": "clean"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 59,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 60,
+          "col": 3,
+          "lit": "filter"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 64,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 65,
+          "col": 3,
+          "lit": "sparse-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 69,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 70,
+          "col": 3,
+          "lit": "sparse-checkout-cone-mode"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 73,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 74,
+          "col": 3,
+          "lit": "fetch-depth"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 76,
+          "col": 14,
+          "lit": "1"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 77,
+          "col": 3,
+          "lit": "fetch-tags"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 79,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 80,
+          "col": 3,
+          "lit": "show-progress"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 82,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 83,
+          "col": 3,
+          "lit": "lfs"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 85,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 86,
+          "col": 3,
+          "lit": "submodules"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 94,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 95,
+          "col": 3,
+          "lit": "set-safe-directory"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 97,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 98,
+          "col": 3,
+          "lit": "github-server-url"
+        },
+        "value": ""
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": true,
+    "script": "dist/index.js",
+    "pre": null,
+    "post": "dist/index.js",
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2025-12-06 18:11:47Z INFO ActionManager] Action pre node.js file: N/A.
+[2025-12-06 18:11:47Z INFO ActionManager] Action node.js file: dist/index.js.
+[2025-12-06 18:11:47Z INFO ActionManager] Action post node.js file: dist/index.js.
+[2025-12-06 18:11:47Z INFO ExecutionContext] Reserve record order 5 to 8 for post job actions.
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Diag': 'D:\Unity\Flying-Copter\actions-runner\_diag'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Diag': 'D:\Unity\Flying-Copter\actions-runner\_diag'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Temp': 'D:\Unity\Flying-Copter\actions-runner\_work\_temp'
+[2025-12-06 18:11:47Z INFO ExecutionContext] Write event payload to D:\Unity\Flying-Copter\actions-runner\_work\_temp\_github_workflow\event.json
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Temp': 'D:\Unity\Flying-Copter\actions-runner\_work\_temp'
+[2025-12-06 18:11:47Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddPathFileCommand, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetEnvFileCommand, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.CreateStepSummaryCommand, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SaveStateFileCommand, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetOutputFileCommand, Runner.Worker
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'repository': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 6,
+  "col": 14,
+  "lit": "Troniron/Flying-Copter"
+}
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'ref': default value evaluate result: ""
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'token': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 24,
+  "col": 14,
+  "lit": "***"
+}
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'ssh-key': default value evaluate result: ""
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'ssh-known-hosts': default value evaluate result: ""
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'ssh-strict': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 47,
+  "col": 14,
+  "lit": "true"
+}
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'ssh-user': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 51,
+  "col": 14,
+  "lit": "git"
+}
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'persist-credentials': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 54,
+  "col": 14,
+  "lit": "true"
+}
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'path': default value evaluate result: ""
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'clean': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 59,
+  "col": 14,
+  "lit": "true"
+}
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'filter': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 64,
+  "col": 14,
+  "lit": ""
+}
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'sparse-checkout': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 69,
+  "col": 14,
+  "lit": ""
+}
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'sparse-checkout-cone-mode': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 73,
+  "col": 14,
+  "lit": "true"
+}
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'fetch-depth': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 76,
+  "col": 14,
+  "lit": "1"
+}
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'fetch-tags': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 79,
+  "col": 14,
+  "lit": "false"
+}
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'show-progress': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 82,
+  "col": 14,
+  "lit": "true"
+}
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'lfs': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 85,
+  "col": 14,
+  "lit": "false"
+}
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'submodules': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 94,
+  "col": 14,
+  "lit": "false"
+}
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'set-safe-directory': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 97,
+  "col": 14,
+  "lit": "true"
+}
+[2025-12-06 18:11:47Z INFO ActionManifestManager] Input 'github-server-url': default value evaluate result: ""
+[2025-12-06 18:11:47Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.InternalPluginSetRepoPathCommandExtension, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetEnvCommandExtension, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetOutputCommandExtension, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SaveStateCommandExtension, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddPathCommandExtension, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddMaskCommandExtension, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddMatcherCommandExtension, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.RemoveMatcherCommandExtension, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.WarningCommandExtension, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.ErrorCommandExtension, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.NoticeCommandExtension, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.DebugCommandExtension, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.GroupCommandExtension, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.EndGroupCommandExtension, Runner.Worker
+[2025-12-06 18:11:47Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.EchoCommandExtension, Runner.Worker
+[2025-12-06 18:11:47Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2025-12-06 18:11:47Z INFO ActionCommandManager] Register action command extension for command set-env
+[2025-12-06 18:11:47Z INFO ActionCommandManager] Register action command extension for command set-output
+[2025-12-06 18:11:47Z INFO ActionCommandManager] Register action command extension for command save-state
+[2025-12-06 18:11:47Z INFO ActionCommandManager] Register action command extension for command add-path
+[2025-12-06 18:11:47Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2025-12-06 18:11:47Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2025-12-06 18:11:47Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2025-12-06 18:11:47Z INFO ActionCommandManager] Register action command extension for command warning
+[2025-12-06 18:11:47Z INFO ActionCommandManager] Register action command extension for command error
+[2025-12-06 18:11:47Z INFO ActionCommandManager] Register action command extension for command notice
+[2025-12-06 18:11:47Z INFO ActionCommandManager] Register action command extension for command debug
+[2025-12-06 18:11:47Z INFO ActionCommandManager] Register action command extension for command group
+[2025-12-06 18:11:47Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2025-12-06 18:11:47Z INFO ActionCommandManager] Register action command extension for command echo
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:47Z INFO HostContext] Well known directory 'Externals': 'D:\Unity\Flying-Copter\actions-runner\externals'
+[2025-12-06 18:11:47Z INFO ProcessInvokerWrapper] Starting process:
+[2025-12-06 18:11:47Z INFO ProcessInvokerWrapper]   File name: 'D:\Unity\Flying-Copter\actions-runner\externals\node20\bin\node.exe'
+[2025-12-06 18:11:47Z INFO ProcessInvokerWrapper]   Arguments: '"D:\Unity\Flying-Copter\actions-runner\_work\_actions\actions\checkout\v4\dist/index.js"'
+[2025-12-06 18:11:47Z INFO ProcessInvokerWrapper]   Working directory: 'D:\Unity\Flying-Copter\actions-runner\_work\Flying-Copter\Flying-Copter'
+[2025-12-06 18:11:47Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-12-06 18:11:47Z INFO ProcessInvokerWrapper]   Encoding web name: utf-8 ; code page: '65001'
+[2025-12-06 18:11:47Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2025-12-06 18:11:47Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-12-06 18:11:47Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2025-12-06 18:11:47Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-12-06 18:11:47Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2025-12-06 18:11:47Z INFO ProcessInvokerWrapper] Process started with process id 27276, waiting for process exit.
+[2025-12-06 18:11:47Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b627dbb9-1487-4f0c-b503-2416c150acc5', success rate: 1/1.
+[2025-12-06 18:11:47Z INFO AddMaskCommandExtension] Add new secret mask with length of 76
+[2025-12-06 18:11:47Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b627dbb9-1487-4f0c-b503-2416c150acc5', success rate: 1/1.
+[2025-12-06 18:11:47Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2025-12-06 18:11:47Z INFO JobServerQueue] Got a step log file to send to results service.
+[2025-12-06 18:11:47Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, D:\Unity\Flying-Copter\actions-runner\_diag\blocks\41d56d80-110b-4b4a-a656-ff6fc89d2ef7_8e505001-b5be-4aa7-8d97-fa69ebe85c91.1
+[2025-12-06 18:11:47Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b627dbb9-1487-4f0c-b503-2416c150acc5', success rate: 1/1.
+[2025-12-06 18:11:48Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b627dbb9-1487-4f0c-b503-2416c150acc5', success rate: 1/1.
+[2025-12-06 18:11:48Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b627dbb9-1487-4f0c-b503-2416c150acc5', success rate: 1/1.
+[2025-12-06 18:11:48Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b627dbb9-1487-4f0c-b503-2416c150acc5', success rate: 1/1.
+[2025-12-06 18:11:48Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2025-12-06 18:11:49Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b627dbb9-1487-4f0c-b503-2416c150acc5', success rate: 1/1.
+[2025-12-06 18:11:50Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b627dbb9-1487-4f0c-b503-2416c150acc5', success rate: 1/1.
+[2025-12-06 18:11:50Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b627dbb9-1487-4f0c-b503-2416c150acc5', success rate: 1/1.
+[2025-12-06 18:11:50Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b627dbb9-1487-4f0c-b503-2416c150acc5', success rate: 1/1.
+[2025-12-06 18:11:51Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b627dbb9-1487-4f0c-b503-2416c150acc5', success rate: 1/1.
+[2025-12-06 18:11:51Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b627dbb9-1487-4f0c-b503-2416c150acc5', success rate: 1/1.
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper] Finished process 27276 with exit code 0, and elapsed time 00:00:04.8384570.
+[2025-12-06 18:11:51Z INFO CreateStepSummaryCommand] Step Summary file (D:\Unity\Flying-Copter\actions-runner\_work\_temp\_runner_file_commands\step_summary_7672b2f0-1e8b-47fd-8a95-d93c3067898b) is empty; skipping attachment upload
+[2025-12-06 18:11:51Z INFO StepsRunner] Step result: 
+[2025-12-06 18:11:51Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "actions/checkout",
+  "ref": "v4",
+  "type": "node20",
+  "stage": "Main",
+  "stepId": "b627dbb9-1487-4f0c-b503-2416c150acc5",
+  "stepContextName": "__actions_checkout",
+  "hasPreStep": false,
+  "hasPostStep": true,
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 5,
+  "startTime": "2025-12-06T18:11:46.9605136Z",
+  "finishTime": "2025-12-06T18:11:51.876526Z"
+}.
+[2025-12-06 18:11:51Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2025-12-06 18:11:51Z INFO StepsRunner] Current state: job state = ''
+[2025-12-06 18:11:51Z INFO StepsRunner] Processing step: DisplayName='Build Android with Unity'
+[2025-12-06 18:11:51Z INFO StepsRunner] Evaluating: success()
+[2025-12-06 18:11:51Z INFO StepsRunner] Result: true
+[2025-12-06 18:11:51Z INFO StepsRunner] Starting the step.
+[2025-12-06 18:11:51Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:51Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:51Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:51Z INFO StepsRunner] Which2: 'chcp'
+[2025-12-06 18:11:51Z INFO StepsRunner] Location: 'C:\WINDOWS\system32\chcp.COM'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper] Starting process:
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   File name: 'C:\WINDOWS\system32\chcp.COM'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   Working directory: 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper] Process started with process id 8108, waiting for process exit.
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper] Finished process 8108 with exit code 0, and elapsed time 00:00:00.0087899.
+[2025-12-06 18:11:51Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2025-12-06 18:11:51Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:51Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:51Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:51Z INFO HostContext] Well known directory 'Temp': 'D:\Unity\Flying-Copter\actions-runner\_work\_temp'
+[2025-12-06 18:11:51Z INFO ExecutionContext] Write event payload to D:\Unity\Flying-Copter\actions-runner\_work\_temp\_github_workflow\event.json
+[2025-12-06 18:11:51Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:51Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:51Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:51Z INFO HostContext] Well known directory 'Temp': 'D:\Unity\Flying-Copter\actions-runner\_work\_temp'
+[2025-12-06 18:11:51Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2025-12-06 18:11:51Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2025-12-06 18:11:51Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2025-12-06 18:11:51Z INFO ActionCommandManager] Register action command extension for command set-env
+[2025-12-06 18:11:51Z INFO ActionCommandManager] Register action command extension for command set-output
+[2025-12-06 18:11:51Z INFO ActionCommandManager] Register action command extension for command save-state
+[2025-12-06 18:11:51Z INFO ActionCommandManager] Register action command extension for command add-path
+[2025-12-06 18:11:51Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2025-12-06 18:11:51Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2025-12-06 18:11:51Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2025-12-06 18:11:51Z INFO ActionCommandManager] Register action command extension for command warning
+[2025-12-06 18:11:51Z INFO ActionCommandManager] Register action command extension for command error
+[2025-12-06 18:11:51Z INFO ActionCommandManager] Register action command extension for command notice
+[2025-12-06 18:11:51Z INFO ActionCommandManager] Register action command extension for command debug
+[2025-12-06 18:11:51Z INFO ActionCommandManager] Register action command extension for command group
+[2025-12-06 18:11:51Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2025-12-06 18:11:51Z INFO ActionCommandManager] Register action command extension for command echo
+[2025-12-06 18:11:51Z INFO ScriptHandler] Which2: 'cmd'
+[2025-12-06 18:11:51Z INFO ScriptHandler] Location: 'C:\WINDOWS\system32\cmd.EXE'
+[2025-12-06 18:11:51Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:51Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:51Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:51Z INFO HostContext] Well known directory 'Temp': 'D:\Unity\Flying-Copter\actions-runner\_work\_temp'
+[2025-12-06 18:11:51Z INFO ScriptHandler] Which2: 'cmd'
+[2025-12-06 18:11:51Z INFO ScriptHandler] Location: 'C:\WINDOWS\system32\cmd.EXE'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper] Starting process:
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   File name: 'C:\WINDOWS\system32\cmd.EXE'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   Arguments: '/D /E:ON /V:OFF /S /C "CALL "D:\Unity\Flying-Copter\actions-runner\_work\_temp\7efd4d09-87e4-405a-b975-0ffea929a28f.cmd""'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   Working directory: 'D:\Unity\Flying-Copter\actions-runner\_work\Flying-Copter\Flying-Copter'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2025-12-06 18:11:51Z INFO ProcessInvokerWrapper] Process started with process id 18900, waiting for process exit.
+[2025-12-06 18:11:51Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b627dbb9-1487-4f0c-b503-2416c150acc5', success rate: 1/1.
+[2025-12-06 18:11:51Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:11:52Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:11:52Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:11:52Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2025-12-06 18:11:52Z INFO JobServerQueue] Got a step log file to send to results service.
+[2025-12-06 18:11:52Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, D:\Unity\Flying-Copter\actions-runner\_diag\blocks\41d56d80-110b-4b4a-a656-ff6fc89d2ef7_b627dbb9-1487-4f0c-b503-2416c150acc5.1
+[2025-12-06 18:11:53Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:11:53Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2025-12-06 18:11:54Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:11:56Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:11:56Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:11:56Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:11:56Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:11:57Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:11:57Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:12:06Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:12:06Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:12:06Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:12:16Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:12:16Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:12:16Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:12:26Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:12:26Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:12:26Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:12:36Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:12:36Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:12:36Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:12:46Z INFO JobServerQueue] Stop aggressive process web console line queue.
+[2025-12-06 18:12:46Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:12:46Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:12:46Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:12:57Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:12:57Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:12:57Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:13:07Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:13:07Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:13:07Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:13:08Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:08Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:09Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:10Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:16Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:17Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:13:17Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:13:17Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:13:17Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:19Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:20Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:23Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:23Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:24Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:24Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:27Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:13:27Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:13:27Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:13:37Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:13:37Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:13:37Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:13:39Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:40Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:41Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:45Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:46Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:46Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:47Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:13:47Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:13:47Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:13:47Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:47Z INFO JobServerQueue] Try to append 2 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 2/2.
+[2025-12-06 18:13:48Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:48Z INFO JobServerQueue] Try to append 2 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 2/2.
+[2025-12-06 18:13:49Z INFO JobServerQueue] Try to append 2 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 2/2.
+[2025-12-06 18:13:49Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:50Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:50Z INFO JobServerQueue] Try to append 4 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 4/4.
+[2025-12-06 18:13:51Z INFO JobServerQueue] Try to append 6 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 6/6.
+[2025-12-06 18:13:51Z INFO JobServerQueue] Try to append 2 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 2/2.
+[2025-12-06 18:13:57Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:13:57Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:13:57Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:13:59Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:13:59Z INFO JobServerQueue] Try to append 2 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 2/2.
+[2025-12-06 18:14:00Z INFO JobServerQueue] Try to append 5 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 5/5.
+[2025-12-06 18:14:01Z INFO JobServerQueue] Try to append 3 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 3/3.
+[2025-12-06 18:14:01Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:02Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:02Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:03Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:03Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:04Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:04Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:05Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:05Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:06Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:06Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:07Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:14:07Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:14:07Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:14:07Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:07Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:08Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:08Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:09Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:09Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:10Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:10Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:11Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:11Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:12Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:12Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:13Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:14Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:14Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:15Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:15Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:16Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:16Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:17Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:14:17Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:14:17Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:14:17Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:17Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:18Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:18Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:19Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:19Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:20Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:20Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:21Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:21Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:22Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:22Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:23Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:23Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:24Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:24Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:25Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:25Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:26Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:26Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:27Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:14:27Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:14:27Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:14:27Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:27Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:28Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:28Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:29Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:29Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:30Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:30Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:31Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:31Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:32Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:33Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:33Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:34Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:34Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:35Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:35Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:36Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:36Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:37Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:37Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:14:37Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:14:37Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:14:37Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:38Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:38Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:39Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:39Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:40Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:40Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:41Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:41Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:42Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:42Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:43Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:43Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:44Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:44Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:45Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:45Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:46Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:46Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:47Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:14:47Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:14:47Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:14:47Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:47Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:48Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:48Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:49Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:49Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:50Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:50Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:51Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:51Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:52Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:53Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:53Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:54Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:54Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:55Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:56Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:56Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:57Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:57Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:14:57Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:14:57Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:14:57Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:58Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:58Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:59Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:14:59Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:00Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:00Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:01Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:01Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:02Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:02Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:03Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:03Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:04Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:04Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:05Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:05Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:06Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:06Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:07Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:07Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:07Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:15:07Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:07Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:08Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:08Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:09Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:09Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:10Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:10Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:11Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:11Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:12Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:12Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:13Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:13Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:14Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:14Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:15Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:15Z INFO JobServerQueue] Got a job log file to send to results service.
+[2025-12-06 18:15:15Z INFO JobServerQueue] Starting upload of job log file to results service ResultsLog, D:\Unity\Flying-Copter\actions-runner\_diag\blocks\41d56d80-110b-4b4a-a656-ff6fc89d2ef7_82cafa1f-f4da-5fe8-84bb-5713f1ebc880.1
+[2025-12-06 18:15:15Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:16Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:17Z INFO JobServerQueue] Try to append 2 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 2/2.
+[2025-12-06 18:15:17Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:17Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:17Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:15:17Z INFO JobServerQueue] Try to append 2 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 2/2.
+[2025-12-06 18:15:18Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:18Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:18Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2025-12-06 18:15:19Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:19Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:19Z INFO JobServerQueue] Got a step log file to send to results service.
+[2025-12-06 18:15:19Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, D:\Unity\Flying-Copter\actions-runner\_diag\blocks\41d56d80-110b-4b4a-a656-ff6fc89d2ef7_af316214-ff2c-4b7f-937d-7db0dce00491.1
+[2025-12-06 18:15:20Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:20Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:20Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2025-12-06 18:15:21Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:21Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:22Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:24Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:24Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:25Z INFO JobServerQueue] Try to append 3 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 3/3.
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper] Finished process 18900 with exit code 0, and elapsed time 00:03:34.1354950.
+[2025-12-06 18:15:26Z INFO CreateStepSummaryCommand] Step Summary file (D:\Unity\Flying-Copter\actions-runner\_work\_temp\_runner_file_commands\step_summary_6bcdf154-ba8e-49a3-8d6c-de13d836a470) is empty; skipping attachment upload
+[2025-12-06 18:15:26Z INFO StepsRunner] Step result: 
+[2025-12-06 18:15:26Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "cmd",
+  "type": "run",
+  "stage": "Main",
+  "stepId": "af316214-ff2c-4b7f-937d-7db0dce00491",
+  "stepContextName": "__run",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 215,
+  "startTime": "2025-12-06T18:11:51.8773991Z",
+  "finishTime": "2025-12-06T18:15:26.0405579Z"
+}.
+[2025-12-06 18:15:26Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2025-12-06 18:15:26Z INFO StepsRunner] Current state: job state = ''
+[2025-12-06 18:15:26Z INFO StepsRunner] Processing step: DisplayName='Upload Android build'
+[2025-12-06 18:15:26Z INFO StepsRunner] Evaluating: success()
+[2025-12-06 18:15:26Z INFO StepsRunner] Result: true
+[2025-12-06 18:15:26Z INFO StepsRunner] Starting the step.
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:15:26Z INFO StepsRunner] Which2: 'chcp'
+[2025-12-06 18:15:26Z INFO StepsRunner] Location: 'C:\WINDOWS\system32\chcp.COM'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper] Starting process:
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   File name: 'C:\WINDOWS\system32\chcp.COM'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   Working directory: 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper] Process started with process id 28784, waiting for process exit.
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper] Finished process 28784 with exit code 0, and elapsed time 00:00:00.0302672.
+[2025-12-06 18:15:26Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:15:26Z INFO ActionManager] Load action that reference repository from 'D:\Unity\Flying-Copter\actions-runner\_work\_actions\actions\upload-artifact\v4'
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:15:26Z INFO ActionManifestManager] Ignore action property author.
+[2025-12-06 18:15:26Z INFO ActionManifestManager] Loaded action.yml file: {
+  "name": "Upload a Build Artifact",
+  "description": "Upload a build artifact that can be used by subsequent workflow steps",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 5,
+          "col": 3,
+          "lit": "name"
+        },
+        "value": {
+          "type": 0,
+          "file": 3,
+          "line": 7,
+          "col": 14,
+          "lit": "artifact"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 8,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 11,
+          "col": 3,
+          "lit": "if-no-files-found"
+        },
+        "value": {
+          "type": 0,
+          "file": 3,
+          "line": 19,
+          "col": 14,
+          "lit": "warn"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 20,
+          "col": 3,
+          "lit": "retention-days"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 26,
+          "col": 3,
+          "lit": "compression-level"
+        },
+        "value": {
+          "type": 0,
+          "file": 3,
+          "line": 36,
+          "col": 14,
+          "lit": "6"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 37,
+          "col": 3,
+          "lit": "overwrite"
+        },
+        "value": {
+          "type": 0,
+          "file": 3,
+          "line": 42,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 3,
+          "line": 43,
+          "col": 3,
+          "lit": "include-hidden-files"
+        },
+        "value": {
+          "type": 0,
+          "file": 3,
+          "line": 47,
+          "col": 14,
+          "lit": "false"
+        }
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": false,
+    "script": "dist/upload/index.js",
+    "pre": null,
+    "post": null,
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2025-12-06 18:15:26Z INFO ActionManager] Action pre node.js file: N/A.
+[2025-12-06 18:15:26Z INFO ActionManager] Action node.js file: dist/upload/index.js.
+[2025-12-06 18:15:26Z INFO ActionManager] Action post node.js file: N/A.
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Temp': 'D:\Unity\Flying-Copter\actions-runner\_work\_temp'
+[2025-12-06 18:15:26Z INFO ExecutionContext] Write event payload to D:\Unity\Flying-Copter\actions-runner\_work\_temp\_github_workflow\event.json
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Temp': 'D:\Unity\Flying-Copter\actions-runner\_work\_temp'
+[2025-12-06 18:15:26Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2025-12-06 18:15:26Z INFO ActionManifestManager] Input 'if-no-files-found': default value evaluate result: {
+  "type": 0,
+  "file": 3,
+  "line": 19,
+  "col": 14,
+  "lit": "warn"
+}
+[2025-12-06 18:15:26Z INFO ActionManifestManager] Input 'retention-days': default value evaluate result: ""
+[2025-12-06 18:15:26Z INFO ActionManifestManager] Input 'compression-level': default value evaluate result: {
+  "type": 0,
+  "file": 3,
+  "line": 36,
+  "col": 14,
+  "lit": "6"
+}
+[2025-12-06 18:15:26Z INFO ActionManifestManager] Input 'overwrite': default value evaluate result: {
+  "type": 0,
+  "file": 3,
+  "line": 42,
+  "col": 14,
+  "lit": "false"
+}
+[2025-12-06 18:15:26Z INFO ActionManifestManager] Input 'include-hidden-files': default value evaluate result: {
+  "type": 0,
+  "file": 3,
+  "line": 47,
+  "col": 14,
+  "lit": "false"
+}
+[2025-12-06 18:15:26Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2025-12-06 18:15:26Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2025-12-06 18:15:26Z INFO ActionCommandManager] Register action command extension for command set-env
+[2025-12-06 18:15:26Z INFO ActionCommandManager] Register action command extension for command set-output
+[2025-12-06 18:15:26Z INFO ActionCommandManager] Register action command extension for command save-state
+[2025-12-06 18:15:26Z INFO ActionCommandManager] Register action command extension for command add-path
+[2025-12-06 18:15:26Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2025-12-06 18:15:26Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2025-12-06 18:15:26Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2025-12-06 18:15:26Z INFO ActionCommandManager] Register action command extension for command warning
+[2025-12-06 18:15:26Z INFO ActionCommandManager] Register action command extension for command error
+[2025-12-06 18:15:26Z INFO ActionCommandManager] Register action command extension for command notice
+[2025-12-06 18:15:26Z INFO ActionCommandManager] Register action command extension for command debug
+[2025-12-06 18:15:26Z INFO ActionCommandManager] Register action command extension for command group
+[2025-12-06 18:15:26Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2025-12-06 18:15:26Z INFO ActionCommandManager] Register action command extension for command echo
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:26Z INFO HostContext] Well known directory 'Externals': 'D:\Unity\Flying-Copter\actions-runner\externals'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper] Starting process:
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   File name: 'D:\Unity\Flying-Copter\actions-runner\externals\node20\bin\node.exe'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   Arguments: '"D:\Unity\Flying-Copter\actions-runner\_work\_actions\actions\upload-artifact\v4\dist/upload/index.js"'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   Working directory: 'D:\Unity\Flying-Copter\actions-runner\_work\Flying-Copter\Flying-Copter'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   Encoding web name: utf-8 ; code page: '65001'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2025-12-06 18:15:26Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'af316214-ff2c-4b7f-937d-7db0dce00491', success rate: 1/1.
+[2025-12-06 18:15:26Z INFO JobServerQueue] Try to append 1 batches web console lines for record '42d25cc1-3656-446a-8983-5a21065648ab', success rate: 1/1.
+[2025-12-06 18:15:26Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2025-12-06 18:15:26Z INFO ProcessInvokerWrapper] Process started with process id 20400, waiting for process exit.
+[2025-12-06 18:15:26Z INFO JobServerQueue] Got a step log file to send to results service.
+[2025-12-06 18:15:26Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, D:\Unity\Flying-Copter\actions-runner\_diag\blocks\41d56d80-110b-4b4a-a656-ff6fc89d2ef7_af316214-ff2c-4b7f-937d-7db0dce00491.2
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper] Finished process 20400 with exit code 0, and elapsed time 00:00:01.3522308.
+[2025-12-06 18:15:27Z INFO CreateStepSummaryCommand] Step Summary file (D:\Unity\Flying-Copter\actions-runner\_work\_temp\_runner_file_commands\step_summary_807334a9-7899-414c-83de-e893eccdb202) is empty; skipping attachment upload
+[2025-12-06 18:15:27Z INFO StepsRunner] Step result: 
+[2025-12-06 18:15:27Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "actions/upload-artifact",
+  "ref": "v4",
+  "type": "node20",
+  "stage": "Main",
+  "stepId": "42d25cc1-3656-446a-8983-5a21065648ab",
+  "stepContextName": "__actions_upload-artifact",
+  "hasPreStep": false,
+  "hasPostStep": false,
+  "result": "succeeded",
+  "errorMessages": [
+    "No files were found with the provided path: build/Android. No artifacts will be uploaded."
+  ],
+  "executionTimeInSeconds": 2,
+  "startTime": "2025-12-06T18:15:26.0417321Z",
+  "finishTime": "2025-12-06T18:15:27.4628135Z"
+}.
+[2025-12-06 18:15:27Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2025-12-06 18:15:27Z INFO StepsRunner] Current state: job state = ''
+[2025-12-06 18:15:27Z INFO StepsRunner] Processing step: DisplayName='Post Checkout repository'
+[2025-12-06 18:15:27Z INFO StepsRunner] Evaluating: always()
+[2025-12-06 18:15:27Z INFO StepsRunner] Result: true
+[2025-12-06 18:15:27Z INFO StepsRunner] Starting the step.
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:15:27Z INFO StepsRunner] Which2: 'chcp'
+[2025-12-06 18:15:27Z INFO StepsRunner] Location: 'C:\WINDOWS\system32\chcp.COM'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper] Starting process:
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   File name: 'C:\WINDOWS\system32\chcp.COM'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   Working directory: 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper] Process started with process id 10440, waiting for process exit.
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper] Finished process 10440 with exit code 0, and elapsed time 00:00:00.0096762.
+[2025-12-06 18:15:27Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:15:27Z INFO ActionManager] Load action that reference repository from 'D:\Unity\Flying-Copter\actions-runner\_work\_actions\actions\checkout\v4'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Actions': 'D:\Unity\Flying-Copter\actions-runner\_work\_actions'
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Loaded action.yml file: {
+  "name": "Checkout",
+  "description": "Checkout a Git repository at a particular version",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 4,
+          "col": 3,
+          "lit": "repository"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 6,
+          "col": 14,
+          "expr": "github.repository"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 7,
+          "col": 3,
+          "lit": "ref"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 12,
+          "col": 3,
+          "lit": "token"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 24,
+          "col": 14,
+          "expr": "github.token"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 25,
+          "col": 3,
+          "lit": "ssh-key"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 37,
+          "col": 3,
+          "lit": "ssh-known-hosts"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 42,
+          "col": 3,
+          "lit": "ssh-strict"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 47,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 48,
+          "col": 3,
+          "lit": "ssh-user"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 51,
+          "col": 14,
+          "lit": "git"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 52,
+          "col": 3,
+          "lit": "persist-credentials"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 54,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 55,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 57,
+          "col": 3,
+          "lit": "clean"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 59,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 60,
+          "col": 3,
+          "lit": "filter"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 64,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 65,
+          "col": 3,
+          "lit": "sparse-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 69,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 70,
+          "col": 3,
+          "lit": "sparse-checkout-cone-mode"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 73,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 74,
+          "col": 3,
+          "lit": "fetch-depth"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 76,
+          "col": 14,
+          "lit": "1"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 77,
+          "col": 3,
+          "lit": "fetch-tags"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 79,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 80,
+          "col": 3,
+          "lit": "show-progress"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 82,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 83,
+          "col": 3,
+          "lit": "lfs"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 85,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 86,
+          "col": 3,
+          "lit": "submodules"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 94,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 95,
+          "col": 3,
+          "lit": "set-safe-directory"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 97,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 98,
+          "col": 3,
+          "lit": "github-server-url"
+        },
+        "value": ""
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": true,
+    "script": "dist/index.js",
+    "pre": null,
+    "post": "dist/index.js",
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2025-12-06 18:15:27Z INFO ActionManager] Action pre node.js file: N/A.
+[2025-12-06 18:15:27Z INFO ActionManager] Action node.js file: dist/index.js.
+[2025-12-06 18:15:27Z INFO ActionManager] Action post node.js file: dist/index.js.
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Temp': 'D:\Unity\Flying-Copter\actions-runner\_work\_temp'
+[2025-12-06 18:15:27Z INFO ExecutionContext] Write event payload to D:\Unity\Flying-Copter\actions-runner\_work\_temp\_github_workflow\event.json
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Work': 'D:\Unity\Flying-Copter\actions-runner\_work'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Temp': 'D:\Unity\Flying-Copter\actions-runner\_work\_temp'
+[2025-12-06 18:15:27Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'repository': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 6,
+  "col": 14,
+  "lit": "Troniron/Flying-Copter"
+}
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'ref': default value evaluate result: ""
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'token': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 24,
+  "col": 14,
+  "lit": "***"
+}
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'ssh-key': default value evaluate result: ""
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'ssh-known-hosts': default value evaluate result: ""
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'ssh-strict': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 47,
+  "col": 14,
+  "lit": "true"
+}
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'ssh-user': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 51,
+  "col": 14,
+  "lit": "git"
+}
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'persist-credentials': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 54,
+  "col": 14,
+  "lit": "true"
+}
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'path': default value evaluate result: ""
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'clean': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 59,
+  "col": 14,
+  "lit": "true"
+}
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'filter': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 64,
+  "col": 14,
+  "lit": ""
+}
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'sparse-checkout': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 69,
+  "col": 14,
+  "lit": ""
+}
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'sparse-checkout-cone-mode': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 73,
+  "col": 14,
+  "lit": "true"
+}
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'fetch-depth': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 76,
+  "col": 14,
+  "lit": "1"
+}
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'fetch-tags': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 79,
+  "col": 14,
+  "lit": "false"
+}
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'show-progress': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 82,
+  "col": 14,
+  "lit": "true"
+}
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'lfs': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 85,
+  "col": 14,
+  "lit": "false"
+}
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'submodules': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 94,
+  "col": 14,
+  "lit": "false"
+}
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'set-safe-directory': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 97,
+  "col": 14,
+  "lit": "true"
+}
+[2025-12-06 18:15:27Z INFO ActionManifestManager] Input 'github-server-url': default value evaluate result: ""
+[2025-12-06 18:15:27Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2025-12-06 18:15:27Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2025-12-06 18:15:27Z INFO ActionCommandManager] Register action command extension for command set-env
+[2025-12-06 18:15:27Z INFO ActionCommandManager] Register action command extension for command set-output
+[2025-12-06 18:15:27Z INFO ActionCommandManager] Register action command extension for command save-state
+[2025-12-06 18:15:27Z INFO ActionCommandManager] Register action command extension for command add-path
+[2025-12-06 18:15:27Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2025-12-06 18:15:27Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2025-12-06 18:15:27Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2025-12-06 18:15:27Z INFO ActionCommandManager] Register action command extension for command warning
+[2025-12-06 18:15:27Z INFO ActionCommandManager] Register action command extension for command error
+[2025-12-06 18:15:27Z INFO ActionCommandManager] Register action command extension for command notice
+[2025-12-06 18:15:27Z INFO ActionCommandManager] Register action command extension for command debug
+[2025-12-06 18:15:27Z INFO ActionCommandManager] Register action command extension for command group
+[2025-12-06 18:15:27Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2025-12-06 18:15:27Z INFO ActionCommandManager] Register action command extension for command echo
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:27Z INFO HostContext] Well known directory 'Externals': 'D:\Unity\Flying-Copter\actions-runner\externals'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper] Starting process:
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   File name: 'D:\Unity\Flying-Copter\actions-runner\externals\node20\bin\node.exe'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   Arguments: '"D:\Unity\Flying-Copter\actions-runner\_work\_actions\actions\checkout\v4\dist/index.js"'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   Working directory: 'D:\Unity\Flying-Copter\actions-runner\_work\Flying-Copter\Flying-Copter'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   Encoding web name: utf-8 ; code page: '65001'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2025-12-06 18:15:27Z INFO ProcessInvokerWrapper] Process started with process id 29424, waiting for process exit.
+[2025-12-06 18:15:27Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2025-12-06 18:15:27Z INFO JobServerQueue] Try to append 1 batches web console lines for record '42d25cc1-3656-446a-8983-5a21065648ab', success rate: 1/1.
+[2025-12-06 18:15:27Z INFO JobServerQueue] Try to append 1 batches web console lines for record '419a52a4-785b-4fa4-9d9c-bd6149ef4f0d', success rate: 1/1.
+[2025-12-06 18:15:27Z INFO AddMaskCommandExtension] Add new secret mask with length of 32
+[2025-12-06 18:15:27Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2025-12-06 18:15:28Z INFO JobServerQueue] Try to append 1 batches web console lines for record '419a52a4-785b-4fa4-9d9c-bd6149ef4f0d', success rate: 1/1.
+[2025-12-06 18:15:28Z INFO JobServerQueue] Try to append 1 batches web console lines for record '419a52a4-785b-4fa4-9d9c-bd6149ef4f0d', success rate: 1/1.
+[2025-12-06 18:15:28Z INFO JobServerQueue] Got a step log file to send to results service.
+[2025-12-06 18:15:28Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, D:\Unity\Flying-Copter\actions-runner\_diag\blocks\41d56d80-110b-4b4a-a656-ff6fc89d2ef7_42d25cc1-3656-446a-8983-5a21065648ab.1
+[2025-12-06 18:15:29Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2025-12-06 18:15:29Z INFO JobServerQueue] Try to append 1 batches web console lines for record '419a52a4-785b-4fa4-9d9c-bd6149ef4f0d', success rate: 1/1.
+[2025-12-06 18:15:30Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-12-06 18:15:30Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-12-06 18:15:30Z INFO ProcessInvokerWrapper] Finished process 29424 with exit code 0, and elapsed time 00:00:02.6583370.
+[2025-12-06 18:15:30Z INFO CreateStepSummaryCommand] Step Summary file (D:\Unity\Flying-Copter\actions-runner\_work\_temp\_runner_file_commands\step_summary_12657ead-4676-4d38-bb57-c5541c156817) is empty; skipping attachment upload
+[2025-12-06 18:15:30Z INFO StepsRunner] Step result: 
+[2025-12-06 18:15:30Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "actions/checkout",
+  "ref": "v4",
+  "type": "node20",
+  "stage": "Post",
+  "stepId": "419a52a4-785b-4fa4-9d9c-bd6149ef4f0d",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 3,
+  "startTime": "2025-12-06T18:15:27.4647263Z",
+  "finishTime": "2025-12-06T18:15:30.1567408Z"
+}.
+[2025-12-06 18:15:30Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2025-12-06 18:15:30Z INFO StepsRunner] Current state: job state = ''
+[2025-12-06 18:15:30Z INFO JobRunner] Finalize job.
+[2025-12-06 18:15:30Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:30Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:30Z INFO HostContext] Well known directory 'Diag': 'D:\Unity\Flying-Copter\actions-runner\_diag'
+[2025-12-06 18:15:30Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:30Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:30Z INFO HostContext] Well known directory 'Diag': 'D:\Unity\Flying-Copter\actions-runner\_diag'
+[2025-12-06 18:15:30Z INFO JobExtension] Initialize Env context
+[2025-12-06 18:15:30Z INFO JobExtension] Initialize steps context
+[2025-12-06 18:15:30Z INFO JobExtension] Total accessible running process: 368.
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 18524 (msedge)
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 14916 (smartscreen)
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 17392 (svchost)
+[2025-12-06 18:15:30Z WARN JobExtension] Ignore exception during read process environment variables: Access is denied.
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 26812 (svchost)
+[2025-12-06 18:15:30Z WARN JobExtension] Ignore exception during read process environment variables: Access is denied.
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 28904 (RazerAppEngine)
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 14556 (svchost)
+[2025-12-06 18:15:30Z WARN JobExtension] Ignore exception during read process environment variables: Access is denied.
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 28716 (svchost)
+[2025-12-06 18:15:30Z WARN JobExtension] Ignore exception during read process environment variables: Access is denied.
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 26684 (RazerAppEngine)
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 15400 (TrustedInstaller)
+[2025-12-06 18:15:30Z WARN JobExtension] Ignore exception during read process environment variables: Access is denied.
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 13072 (TiWorker)
+[2025-12-06 18:15:30Z WARN JobExtension] Ignore exception during read process environment variables: Access is denied.
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 26372 (svchost)
+[2025-12-06 18:15:30Z WARN JobExtension] Ignore exception during read process environment variables: Access is denied.
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 10868 (msedge)
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 4984 (dllhost)
+[2025-12-06 18:15:30Z WARN JobExtension] Ignore exception during read process environment variables: Access is denied.
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 26056 (backgroundTaskHost)
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 26648 (backgroundTaskHost)
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 3572 (PhoneExperienceHost)
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 29060 (svchost)
+[2025-12-06 18:15:30Z WARN JobExtension] Ignore exception during read process environment variables: Access is denied.
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 4420 (SearchProtocolHost)
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 27132 (msedge)
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 4184 (msedge)
+[2025-12-06 18:15:30Z INFO JobExtension] Inspecting process environment variables. PID: 15228 (msedge)
+[2025-12-06 18:15:30Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "complete_job",
+  "type": "runner",
+  "stage": "Post",
+  "stepId": "15ed7dea-8b6e-42a8-a541-dd9c16e9fc97",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 1,
+  "startTime": "2025-12-06T18:15:30.1620955Z",
+  "finishTime": "2025-12-06T18:15:30.2258988Z"
+}.
+[2025-12-06 18:15:30Z INFO JobRunner] Job result after all job steps finish: Succeeded
+[2025-12-06 18:15:30Z INFO JobRunner] Completing the job execution context.
+[2025-12-06 18:15:30Z INFO JobRunner] Shutting down the job server queue.
+[2025-12-06 18:15:30Z INFO JobServerQueue] Fire signal to shutdown all queues.
+[2025-12-06 18:15:30Z INFO JobServerQueue] All queue process task stopped.
+[2025-12-06 18:15:30Z INFO JobServerQueue] Try to append 1 batches web console lines for record '15ed7dea-8b6e-42a8-a541-dd9c16e9fc97', success rate: 1/1.
+[2025-12-06 18:15:30Z INFO JobServerQueue] Web console line queue drained.
+[2025-12-06 18:15:30Z INFO JobServerQueue] Uploading 3 files in one shot.
+[2025-12-06 18:15:30Z INFO JobServerQueue] Try to upload 3 log files or attachments, success rate: 3/3.
+[2025-12-06 18:15:30Z INFO JobServerQueue] File upload queue drained.
+[2025-12-06 18:15:30Z INFO JobServerQueue] Starting results-based upload queue...
+[2025-12-06 18:15:30Z INFO JobServerQueue] Uploading 3 file(s) in one shot through results service.
+[2025-12-06 18:15:30Z INFO JobServerQueue] Got a step log file to send to results service.
+[2025-12-06 18:15:30Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, D:\Unity\Flying-Copter\actions-runner\_diag\blocks\41d56d80-110b-4b4a-a656-ff6fc89d2ef7_419a52a4-785b-4fa4-9d9c-bd6149ef4f0d.1
+[2025-12-06 18:15:31Z INFO JobServerQueue] Got a step log file to send to results service.
+[2025-12-06 18:15:31Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, D:\Unity\Flying-Copter\actions-runner\_diag\blocks\41d56d80-110b-4b4a-a656-ff6fc89d2ef7_15ed7dea-8b6e-42a8-a541-dd9c16e9fc97.1
+[2025-12-06 18:15:32Z INFO JobServerQueue] Got a job log file to send to results service.
+[2025-12-06 18:15:32Z INFO JobServerQueue] Starting upload of job log file to results service ResultsLog, D:\Unity\Flying-Copter\actions-runner\_diag\blocks\41d56d80-110b-4b4a-a656-ff6fc89d2ef7_82cafa1f-f4da-5fe8-84bb-5713f1ebc880.2
+[2025-12-06 18:15:33Z INFO JobServerQueue] Tried to upload 3 file(s) to results, success rate: 3/3.
+[2025-12-06 18:15:33Z INFO JobServerQueue] Results upload queue drained.
+[2025-12-06 18:15:33Z INFO JobServerQueue] Timeline update queue drained.
+[2025-12-06 18:15:33Z INFO JobServerQueue] Disposing job server ...
+[2025-12-06 18:15:33Z INFO JobServerQueue] Disposing results server ...
+[2025-12-06 18:15:33Z INFO JobServerQueue] All queue process tasks have been stopped, and all queues are drained.
+[2025-12-06 18:15:33Z INFO TempDirectoryManager] Cleaning runner temp folder: D:\Unity\Flying-Copter\actions-runner\_work\_temp
+[2025-12-06 18:15:33Z INFO HostContext] Well known directory 'Bin': 'D:\Unity\Flying-Copter\actions-runner\bin'
+[2025-12-06 18:15:33Z INFO HostContext] Well known directory 'Root': 'D:\Unity\Flying-Copter\actions-runner'
+[2025-12-06 18:15:33Z INFO HostContext] Well known directory 'Diag': 'D:\Unity\Flying-Copter\actions-runner\_diag'
+[2025-12-06 18:15:33Z INFO HostContext] Well known config file 'Telemetry': 'D:\Unity\Flying-Copter\actions-runner\_diag\.telemetry'
+[2025-12-06 18:15:33Z INFO JobRunner] Raising job completed against run service
+[2025-12-06 18:15:34Z INFO Worker] Job completed.
