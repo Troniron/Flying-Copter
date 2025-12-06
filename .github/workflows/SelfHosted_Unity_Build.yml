@@ -21,7 +21,7 @@ jobs:
         shell: cmd
         run: |
           rem >>>>>>> CHANGE THIS PATH TO YOUR UNITY.EXE <<<<<<<<
-          set "UNITY_PATH=C:\Program Files\Unity\Hub\Editor\2022.3.41f1\Editor\Unity.exe"
+          set "UNITY_PATH=C:\Program Files\Unity\Hub\Editor\2022.3.20f1\Editor\Unity.exe"
 
           echo Using Unity at: %UNITY_PATH%
           if not exist "%UNITY_PATH%" (
