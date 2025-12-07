@@ -1,26 +1,6 @@
-name: SelfHosted_Unity_Android
-
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - BirdFly
-  pull_request:
-    branches:
-      - BirdFly
-
-jobs:
-  build-android:
-    runs-on: [self-hosted, windows]
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Build Android with Unity
         shell: cmd
         run: |
-          rem >>> Unity Editor path <<<
           set "UNITY_PATH=C:\Program Files\Unity\Hub\Editor\2022.3.20f1\Editor\Unity.exe"
 
           echo Using Unity at: %UNITY_PATH%
@@ -29,17 +9,15 @@ jobs:
             exit /b 1
           )
 
-          rem Create output folder if missing
+          rem Optional: ensure folder exists
           if not exist build\Android mkdir build\Android
 
-          rem Build APK
           "%UNITY_PATH%" ^
-            -batchmode -nographics -quit ^
+            -batchmode -nographics ^
             -projectPath "%CD%" ^
-            -buildTarget Android ^
-            -customBuildName "AndroidBuild" ^
-            -customBuildPath "build\Android\AndroidBuild.apk"
-
+            -executeMethod CIAndroidBuild.BuildAndroid ^
+            -quit ^
+            -logfile build\Android\unity-build.log
       - name: Upload Android APK
         uses: actions/upload-artifact@v4
         with:
