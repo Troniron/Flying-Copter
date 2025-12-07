@@ -20,7 +20,7 @@ jobs:
       - name: Build Android with Unity
         shell: cmd
         run: |
-          rem >>>>>>> CHANGE THIS PATH TO YOUR UNITY.EXE <<<<<<<<
+          rem >>> Unity Editor path <<<
           set "UNITY_PATH=C:\Program Files\Unity\Hub\Editor\2022.3.20f1\Editor\Unity.exe"
 
           echo Using Unity at: %UNITY_PATH%
@@ -29,12 +29,10 @@ jobs:
             exit /b 1
           )
 
-          rem Make sure output folder exists
-          if not exist build\Android (
-            mkdir build\Android
-          )
+          rem Create output folder if missing
+          if not exist build\Android mkdir build\Android
 
-          rem Build the Android APK
+          rem Build APK
           "%UNITY_PATH%" ^
             -batchmode -nographics -quit ^
             -projectPath "%CD%" ^
@@ -42,8 +40,8 @@ jobs:
             -customBuildName "AndroidBuild" ^
             -customBuildPath "build\Android\AndroidBuild.apk"
 
-      - name: Upload Android build
+      - name: Upload Android APK
         uses: actions/upload-artifact@v4
         with:
           name: AndroidBuild
-          path: build/Android
+          path: build/Android/AndroidBuild.apk
