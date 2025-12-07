@@ -1,3 +1,22 @@
+name: SelfHosted_Unity_Android
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - BirdFly
+  pull_request:
+    branches:
+      - BirdFly
+
+jobs:
+  build-android:
+    runs-on: [self-hosted, windows]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Build Android with Unity
         shell: cmd
         run: |
@@ -18,6 +37,7 @@
             -executeMethod CIAndroidBuild.BuildAndroid ^
             -quit ^
             -logfile build\Android\unity-build.log
+
       - name: Upload Android APK
         uses: actions/upload-artifact@v4
         with:
